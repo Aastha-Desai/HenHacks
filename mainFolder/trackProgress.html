@@ -7,28 +7,37 @@
     <link rel="stylesheet" href="trackProgress.css">
 </head>
 <body>
-    <div class="calendar">
-        <h2 id="monthYear"></h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
-            </thead>
-            <tbody id="calendarBody"></tbody>
-        </table>
-        <div id="sliderContainer">
-            <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
-
+    <div class="sidebar">
+        <h2>Welcome User</h2>
+        <a href="mainFolder/trackProgress.html">Follow goals</a>
+        <a href="mainFolder/postsPage.html">Posts from community</a>
+    </div>
+    <div class="content">
+        <h1>Welcome</h1>
+        <p>This is the main content area.</p>
+        <div class="calendar-container">
+            <div class="calendar">
+                <h2 id="monthYear"></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendarBody"></tbody>
+                </table>
+                <div id="sliderContainer">
+                    <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
+                </div>
+            </div>
         </div>
     </div>
-
     <script>
         let selectedCell = null;
         const sliderContainer = document.getElementById("sliderContainer");
@@ -57,7 +66,7 @@
                     } else {
                         let fullDate = `${year}-${month + 1}-${date}`;
                         let moodValue = moodData[fullDate] !== undefined ? moodData[fullDate] : "";
-                        let colorStyle = moodValue !== "" ? `style=\"background-color: ${getColor(moodValue)};\"` : "";
+                        let colorStyle = moodValue !== "" ? `style="background-color: ${getColor(moodValue)};"` : "";
                         row += `<td onclick="pickColor(this, '${fullDate}')" data-value="${moodValue}" ${colorStyle}>${date}</td>`;
                         date++;
                     }
@@ -107,4 +116,3 @@
     </script>
 </body>
 </html>
-
