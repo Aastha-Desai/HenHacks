@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Month Calendar</title>
+    <link rel="stylesheet" href="trackProgress.css">
+</head>
+<body>
+    <div class="calendar">
+        <h2 id="monthYear"></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody"></tbody>
+        </table>
+        <div id="sliderContainer">
+            <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
+            <span id="sliderLabel">(˶ᵔ ᵕ ᵔ˶)</span>
+        </div>
+    </div>
+
+    <script>
+        let selectedCell = null;
+        const sliderContainer = document.getElementById("sliderContainer");
+        const valueSlider = document.getElementById("valueSlider");
+
+        function generateCalendar() {
+            const today = new Date();
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            document.getElementById("monthYear").innerText = today.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            let calendarBody = "";
+            let date = 1;
+            
+            for (let i = 0; i < 6; i++) {
+                let row = "<tr>";
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        row += "<td></td>";
+                    } else if (date > daysInMonth) {
+                        row += "<td></td>";
+                    } else {
+                        row += `<td onclick="pickColor(this)" data-value="50">${date}</td>`;
+                        date++;
+                    }
+                }
+                row += "</tr>";
+                calendarBody += row;
+                if (date > daysInMonth) break;
+            }
+            
+            document.getElementById("calendarBody").innerHTML = calendarBody;
+        }
+        
+        function pickColor(cell) {
+            selectedCell = cell;
+            valueSlider.value = selectedCell.getAttribute("data-value");
+            sliderContainer.style.display = "flex";
+            valueSlider.focus();
+        }
+        
+        function updateColor() {
+            if (selectedCell) {
+                let value = valueSlider.value;
+                selectedCell.setAttribute("data-value", value);
+                
+                let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
+                let green = value > 50 ? 255 : Math.round(value * 5.1);
+                selectedCell.style.backgroundColor = `rgb(${red}, ${green}, 0)`;
+            }
+        }
+        
+        function hideSlider() {
+            sliderContainer.style.display = "none";
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>
+
