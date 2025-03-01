@@ -7,9 +7,7 @@
   --line-height: 1.2;
 }
 
-/**
-* BASE STYLES
-*/
+/* BASE STYLES */
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
@@ -23,14 +21,14 @@ body {
   padding: 0;
 }
 
-/**
-* SECTION 1 SPECIFIC STYLES
-*/
+/* SECTION 1 SPECIFIC STYLES */
 .section1 {
-  background: var(--color-light); /* Gradient background for this section */
-  background-size: cover; /* Ensure the background covers the whole section */
-  height: 100vh; /* Make this section cover the full viewport height */
+  background: var(--color-light);
+  background-size: cover;
+  height: 100vh;
   padding: 2rem;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease-out; /* Smooth fade-in */
 }
 
 .section1 .header {
@@ -79,7 +77,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%; /* Ensure the content fills the section */
+  height: 100%;
 }
 
 .section1 .main__text {
@@ -107,17 +105,14 @@ body {
   width: 0;
 }
 
-/* First line animation */
 .section1 .line1 {
   animation: typing 2s steps(20) forwards;
 }
 
-/* Second line animation with delay */
 .section1 .line2 {
-  animation: typing 1s steps(20) 1s forwards; /* 2s delay for the second line */
+  animation: typing 1s steps(20) 1s forwards;
 }
 
-/* Create the typing effect */
 @keyframes typing {
   from {
     width: 0;
@@ -154,13 +149,13 @@ body {
   height: auto;
 }
 
-/**
-* SECTION 2 SPECIFIC STYLES
-*/
+/* SECTION 2 SPECIFIC STYLES */
 .section2 {
   background: white;
-  height: 100vh; /* Make the section take up the full viewport height */
+  height: 100vh;
   padding: 2rem;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease-out; /* Smooth fade-in */
 }
 
 .section2 h1 {
@@ -171,4 +166,9 @@ body {
 .section2 p {
   font-size: 1rem;
   color: var(--color-text);
+}
+
+/* This class will be added when the section is in the viewport */
+.section-visible {
+  opacity: 1 !important;
 }
