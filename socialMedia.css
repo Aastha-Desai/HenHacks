@@ -1,166 +1,168 @@
-/* Full-page blue background */
+/* Full-page gradient background */
 html, body {
-    height: 100%;
-    margin: 0;
-    background-color: lightblue; /* Blue background for the entire page */
-  }
-  
-  /* Header Styles */
-  header {
-    background-color: #81bedb; /* Solid blue for the header */
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  header h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: darkblue; /* Dark blue text for the header */
-  }
-  
-  /* Main Container */
-  .wrapper {
-    padding: 20px;
-    border-radius: 10px;
-    margin: 100px auto 20px; /* Adjust margin to account for the fixed header */
-    max-width: 960px;
-    background-color: transparent; /* Remove white background */
-    color: #333; /* Ensure text is readable */
-  }
-  
-  /* Testimonial Quote Styles */
-  .testimonial-quote {
-    font-size: 16px;
-    position: relative;
-    margin-bottom: 40px;
-  }
-  
-  .testimonial-quote blockquote {
-    border: 0;
-    margin: 0;
-    padding: 0;
-    background: none;
-    color: gray;
-    font-family: Georgia, serif;
-    font-size: 1.5em;
-    font-style: italic;
-    line-height: 1.4 !important;
-    text-shadow: 0 1px white;
-  }
-  
-  .testimonial-quote blockquote p {
-    color: #75808a;
-    line-height: 1.4 !important;
-  }
-  
-  .testimonial-quote blockquote p:first-child:before {
-    content: '\201C';
-    color: #81bedb;
-    font-size: 7.5em;
-    font-weight: 700;
-    opacity: .3;
-    position: absolute;
-    top: -.4em;
-    left: -.2em;
-    text-shadow: none;
-    z-index: -300;
-  }
-  
-  .testimonial-quote img.profile-picture {
-    border: 3px solid #9CC1D3;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .testimonial-quote .quote-container {
-    padding-left: 140px;
-  }
-  
-  .testimonial-quote cite {
-    color: gray;
-    display: block;
-    font-size: 0.8em;
-  }
-  
-  .testimonial-quote cite span {
-    color: #5e5e5e;
-    font-size: 1em;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 0 1px white;
-  }
-  
-  /* Add Post Button */
-  #addPostButton {
-    display: block;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: lightgrey;
-    color: black;
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    text-align: center;
-    line-height: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  #addPostButton:hover {
-    background-color: lightgrey;
-  }
-  
-  /* Post Form */
-  #postForm {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
-    width: 300px;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  #postForm textarea {
-    width: 100%;
-    height: 50px;
-    resize: none;
-  }
-  
-  #postForm input[type="file"] {
-    margin-top: 10px;
-  }
-  
-  #postForm button {
-    margin-top: 10px;
-    width: 100%;
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #postForm button:hover {
-    background-color: grey;
-  }
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(to bottom, #81bedb, #eff0ef); /* Blue to light gray gradient */
+  background-attachment: fixed; /* Ensures the gradient scrolls with the page */
+}
+
+/* Header Styles */
+header {
+  color: black;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: black; /* White text for the header */
+}
+
+/* Main Container */
+.wrapper {
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding-top: 100px; /* Add padding-top to account for the fixed header */
+  max-width: 960px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  color: #333; /* Ensure text is readable */
+  min-height: calc(100vh - 140px); /* Ensure the wrapper covers the remaining space */
+}
+
+/* Testimonial Quote Styles */
+.testimonial-quote {
+  font-size: 16px;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.testimonial-quote blockquote {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: gray;
+  font-family: Georgia, serif;
+  font-size: 1.5em;
+  font-style: italic;
+  line-height: 1.4 !important;
+  text-shadow: 0 1px white;
+}
+
+.testimonial-quote blockquote p {
+  color: #75808a;
+  line-height: 1.4 !important;
+}
+
+.testimonial-quote blockquote p:first-child:before {
+  content: '\201C';
+  color: #81bedb;
+  font-size: 7.5em;
+  font-weight: 700;
+  opacity: .3;
+  position: absolute;
+  top: -.4em;
+  left: -.2em;
+  text-shadow: none;
+  z-index: -300;
+}
+
+.testimonial-quote img.profile-picture {
+  border: 3px solid #9CC1D3;
+  border-radius: 50%; 
+  width: 75px;
+  height: 75px; 
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.testimonial-quote .quote-container {
+  padding-left: 140px;
+}
+
+.testimonial-quote cite {
+  color: gray;
+  display: block;
+  font-size: 0.8em;
+}
+
+.testimonial-quote cite span {
+  color: #5e5e5e;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 1px white;
+}
+
+/* Add Post Button */
+#addPostButton {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#addPostButton:hover {
+  background-color: lightgrey;
+}
+
+/* Post Form */
+#postForm {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+  width: 300px;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#postForm textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+}
+
+#postForm input[type="file"] {
+  margin-top: 10px;
+}
+
+#postForm button {
+  margin-top: 10px;
+  width: 100%;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#postForm button:hover {
+  background-color: grey;
+}

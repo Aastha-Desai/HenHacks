@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const createPost = (imageUrl = null) => {
         const postHTML = `
           <div class="testimonial-quote group">
-            <img src="http://placehold.it/120x120">
+            <img src="pfp.jpg" alt="Profile Picture" class="profile-picture">
             <div class="quote-container">
               <blockquote>
                 <p>${thoughts || ''}</p>
