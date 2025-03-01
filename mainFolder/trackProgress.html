@@ -25,7 +25,7 @@
         </table>
         <div id="sliderContainer">
             <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
-            
+
         </div>
     </div>
 
@@ -33,6 +33,7 @@
         let selectedCell = null;
         const sliderContainer = document.getElementById("sliderContainer");
         const valueSlider = document.getElementById("valueSlider");
+        let moodData = {}; // Global JSON object to store mood values
 
         function generateCalendar() {
             const today = new Date();
@@ -54,7 +55,10 @@
                     } else if (date > daysInMonth) {
                         row += "<td></td>";
                     } else {
-                        row += `<td onclick="pickColor(this)" data-value="50">${date}</td>`;
+                        let fullDate = `${year}-${month + 1}-${date}`;
+                        let moodValue = moodData[fullDate] !== undefined ? moodData[fullDate] : "";
+                        let colorStyle = moodValue !== "" ? `style=\"background-color: ${getColor(moodValue)};\"` : "";
+                        row += `<td onclick="pickColor(this, '${fullDate}')" data-value="${moodValue}" ${colorStyle}>${date}</td>`;
                         date++;
                     }
                 }
@@ -66,9 +70,10 @@
             document.getElementById("calendarBody").innerHTML = calendarBody;
         }
         
-        function pickColor(cell) {
+        function pickColor(cell, date) {
             selectedCell = cell;
-            valueSlider.value = selectedCell.getAttribute("data-value");
+            selectedCell.dataset.date = date;
+            valueSlider.value = selectedCell.getAttribute("data-value") || 50;
             sliderContainer.style.display = "flex";
             valueSlider.focus();
         }
@@ -77,15 +82,25 @@
             if (selectedCell) {
                 let value = valueSlider.value;
                 selectedCell.setAttribute("data-value", value);
+                selectedCell.style.backgroundColor = getColor(value);
+                let date = selectedCell.dataset.date;
                 
-                let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
-                let green = value > 50 ? 255 : Math.round(value * 5.1);
-                selectedCell.style.backgroundColor = `rgb(${red}, ${green}, 0)`;
+                if (value !== "") {
+                    moodData[date] = value; // Only add if there is a value
+                } else {
+                    delete moodData[date]; // Remove entry if no value
+                }
             }
         }
         
         function hideSlider() {
             sliderContainer.style.display = "none";
+        }
+
+        function getColor(value) {
+            let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
+            let green = value > 50 ? 255 : Math.round(value * 5.1);
+            return `rgb(${red}, ${green}, 0)`;
         }
         
         generateCalendar();
