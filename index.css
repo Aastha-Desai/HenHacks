@@ -1,29 +1,14 @@
 :root {
   --color-black: #2A2A2A;
   --color-text: #A9A9A9;
-  --color-light: #fff;
+  --color-light: radial-gradient(circle, rgb(182, 200, 227), rgb(161, 195, 246)); /* Gradient color */
   --color-text-light: #444444;
   --font-base-family: 'Manrope', 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   --line-height: 1.2;
 }
 
 /**
-* utils
-*/
-.font-800 {
-  font-weight: 800;
-}
-
-.font-600 {
-  font-weight: 600;
-}
-
-.font-400 {
-  font-weight: 400;
-}
-
-/**
-* BASE
+* BASE STYLES
 */
 *, *:before, *:after {
   box-sizing: border-box;
@@ -33,61 +18,50 @@
 
 body {
   font-family: var(--font-base-family, sans-serif);
-  background: var(--color-light);
   color: var(--color-black);
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: 0.5fr repeat(9, 1fr);
   line-height: var(--line-height);
-  padding: 0 0 0 5rem;
+  padding: 0;
 }
 
 /**
-* FLOW UTILITY
+* SECTION 1 SPECIFIC STYLES
 */
-.flow {
-  --metric-rhythm: 2rem;
-  --flow-space: var(--metric-rhythm);
+.section1 {
+  background: var(--color-light); /* Gradient background for this section */
+  background-size: cover; /* Ensure the background covers the whole section */
+  height: 100vh; /* Make this section cover the full viewport height */
+  padding: 2rem;
 }
 
-.flow > * + * {
-  margin-top: var(--flow-space);
-}
-
-/**
-* HEADER
-*/
-.header {
+.section1 .header {
   padding-top: 2.5rem;
 }
 
-.header__wrapper {
+.section1 .header__wrapper {
   display: flex;
   align-items: center;
-  --flow-space: 2.5rem;
 }
 
-.header__logo {
+.section1 .header__logo {
   font-size: 1.1rem;
   font-weight: 800;
-  display: inline-block;
 }
 
-.nav {
+.section1 .nav {
   display: flex;
 }
 
-.nav__list {
+.section1 .nav__list {
   display: flex;
   padding-left: 3rem;
 }
 
-.nav__item {
+.section1 .nav__item {
   list-style-type: none;
   padding-left: 2rem;
 }
 
-a {
+.section1 a {
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 0.825rem;
@@ -96,33 +70,66 @@ a {
   padding-bottom: 0.5em;
 }
 
-a.active {
+.section1 a.active {
   border-bottom: 2px solid var(--color-black);
 }
 
-/**
-* SECTION
-*/
-.section__img {
-  margin-top: 1rem;
-  grid-area: 2 / 2 / 6 / 3;
+/* Main content of Section 1 */
+.section1 .main__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; /* Ensure the content fills the section */
 }
 
-/**
-* MAIN
-*/
-.main {
-  grid-area: 3 / 1 / -1 / 2;
+.section1 .main__text {
+  width: 50%;
 }
 
-.main__heading {
+.section1 .main__image {
+  width: 50%;
+  text-align: right;
+}
+
+.section1 .main__heading {
   font-size: 3.6rem;
-  max-width: 13ch;
   line-height: 1.4;
   font-weight: 400;
+  text-align: left;
 }
 
-.main__sub {
+.section1 .line1,
+.section1 .line2 {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  width: 0;
+}
+
+/* First line animation */
+.section1 .line1 {
+  animation: typing 2s steps(20) forwards;
+}
+
+/* Second line animation with delay */
+.section1 .line2 {
+  animation: typing 1s steps(20) 1s forwards; /* 2s delay for the second line */
+}
+
+/* Create the typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.section1 .main__sub {
   font-weight: 400;
   color: var(--color-text);
   font-size: 1.2rem;
@@ -130,7 +137,7 @@ a.active {
   max-width: 38ch;
 }
 
-.main__button {
+.section1 .main__button {
   background: var(--color-black);
   color: var(--color-light);
   border-radius: 900px;
@@ -140,4 +147,28 @@ a.active {
   cursor: pointer;
   line-height: 1.4;
   font-weight: 600;
+}
+
+.section1 .main__image img {
+  width: 100%;
+  height: auto;
+}
+
+/**
+* SECTION 2 SPECIFIC STYLES
+*/
+.section2 {
+  background: white;
+  height: 100vh; /* Make the section take up the full viewport height */
+  padding: 2rem;
+}
+
+.section2 h1 {
+  font-size: 2.5rem;
+  color: var(--color-black);
+}
+
+.section2 p {
+  font-size: 1rem;
+  color: var(--color-text);
 }
