@@ -1,7 +1,7 @@
 :root {
   --color-black: #2A2A2A;
-  --color-text: #A9A9A9;
-  --color-light: radial-gradient(circle, rgb(182, 200, 227), rgb(161, 195, 246)); /* Gradient color */
+  --color-text: #777777;
+  --color-light: radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245));
   --color-text-light: #444444;
   --font-base-family: 'Manrope', 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   --line-height: 1.2;
@@ -19,6 +19,19 @@ body {
   color: var(--color-black);
   line-height: var(--line-height);
   padding: 0;
+  background-color: #fff;
+}
+
+/* FADE-IN EFFECT */
+.section1, .section2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* SECTION 1 SPECIFIC STYLES */
@@ -27,8 +40,6 @@ body {
   background-size: cover;
   height: 100vh;
   padding: 2rem;
-  opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease-out; /* Smooth fade-in */
 }
 
 .section1 .header {
@@ -38,10 +49,11 @@ body {
 .section1 .header__wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .section1 .header__logo {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -72,7 +84,7 @@ body {
   border-bottom: 2px solid var(--color-black);
 }
 
-/* Main content of Section 1 */
+/* Main content */
 .section1 .main__content {
   display: flex;
   justify-content: space-between;
@@ -96,6 +108,7 @@ body {
   text-align: left;
 }
 
+/* Text Animation */
 .section1 .line1,
 .section1 .line2 {
   display: inline-block;
@@ -124,6 +137,7 @@ body {
   }
 }
 
+/* Subtitle */
 .section1 .main__sub {
   font-weight: 400;
   color: var(--color-text);
@@ -132,43 +146,139 @@ body {
   max-width: 38ch;
 }
 
+/* Button */
 .section1 .main__button {
   background: var(--color-black);
-  color: var(--color-light);
+  color: white;
   border-radius: 900px;
   font-size: 0.75rem;
   width: 10.5rem;
   height: 2.5rem;
   cursor: pointer;
-  line-height: 1.4;
   font-weight: 600;
+  border: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
+.section1 .main__button:hover {
+  background: var(--color-text-light);
+  transform: scale(1.05);
+}
+
+/* IMAGE HOVER ANIMATION */
 .section1 .main__image img {
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* SECTION 2 SPECIFIC STYLES */
+.section1 .main__image img:hover {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* Wave Divider */
+.wave {
+  position: relative;
+  height: 50px;
+  background: #fff;
+  margin-top: -1px;
+}
+
+.wave:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png') repeat-x;
+  background-size: contain;
+}
+
+/* Section 2: Our Mission */
 .section2 {
-  background: white;
-  height: 100vh;
-  padding: 2rem;
-  opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease-out; /* Smooth fade-in */
+  background: linear-gradient(to right, #f1f3f6, #d2daff);  
+  padding: 4rem;
 }
 
 .section2 h1 {
   font-size: 2.5rem;
-  color: var(--color-black);
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.section2 p {
+/* Flexbox layout */
+.section2__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Image styling */
+.section2__image img {
+  border-radius: 8px;
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Pulse animation on hover */
+.section2__image img:hover {
+  animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Text styling */
+.section2__text {
+  flex: 1;
+}
+
+.section2__text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section2__text p {
   font-size: 1rem;
   color: var(--color-text);
 }
 
-/* This class will be added when the section is in the viewport */
-.section-visible {
-  opacity: 1 !important;
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .section1 .main__content {
+    flex-direction: column;
+  }
+
+  .section1 .main__text,
+  .section1 .main__image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section1 .main__heading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  .section1 .main__button {
+    width: 100%;
+  }
+
+  .section2__content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section2__image img {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
