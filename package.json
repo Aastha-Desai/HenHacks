@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "firebase": "^11.4.0"
+=======
   "name": "henhacks",
   "version": "1.0.0",
   "description": "Varsha, Aastha, Aiman project.",
@@ -19,5 +24,6 @@
   "homepage": "https://github.com/VarshaDanduri/HenHacks#readme",
   "dependencies": {
     "express": "^4.21.2"
+>>>>>>> eb23c54b87c4841a92aac47957d46653a7f69d86
   }
 }
