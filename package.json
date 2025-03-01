@@ -1,0 +1,23 @@
+{
+  "name": "henhacks",
+  "version": "1.0.0",
+  "description": "Varsha, Aastha, Aiman project.",
+  "main": "trackProgres.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VarshaDanduri/HenHacks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VarshaDanduri/HenHacks/issues"
+  },
+  "homepage": "https://github.com/VarshaDanduri/HenHacks#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,47 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TheTOP - Sign In</title>
-    <link rel="stylesheet" href="index.css" />
-    <!-- Add Firebase SDK for modular setup -->
-    <script type="module">
-      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-      import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
-
-      // Firebase config
-      const firebaseConfig = {
-        apiKey: "AIzaSyCd-bvBO0teOhwNMquREnRHh8v-WnhBk2Y",
-        authDomain: "healthcare-82f91.firebaseapp.com",
-        projectId: "healthcare-82f91",
-        storageBucket: "healthcare-82f91.firebasestorage.app",
-        messagingSenderId: "480612792955",
-        appId: "1:480612792955:web:79735463d434f2b6dec0de",
-        measurementId: "G-L2PWVB5N5L",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-
-      // Handle login button click (Google login)
-      document.getElementById("loginBtn").addEventListener("click", () => {
-        console.log("Login button clicked!");
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            const user = result.user;
-            console.log("User signed in:", user);
-            // Redirect to main chat page after login
-            window.location.href = "mainChatbot.html";
-          })
-          .catch((error) => {
-            console.error("Error signing in:", error.message);
-            alert("Error during login: " + error.message);
-          });
-      });
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; connect-src *;">
+    <title>Login with Google</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
   </head>
   <body>
     <!-- Section 1: This will contain specific styles for this section only -->
@@ -68,12 +35,8 @@
               <span class="line1">Bring Yourself</span><br />
               <span class="line2">To The Top</span>
             </h2>
-            <p class="main__sub">
-              Stop looking for a secret trick and recognize that the best version
-              of yourself should be your vision, not anybody else’s
-            </p>
-            <br />
-            <button id="loginBtn" class="main__button">Log In with Google</button>
+            <p class="main__sub">Stop looking for a secret trick and recognize that the best version of yourself should be your vision, not anybody else’s</p>
+            <br><button id="loginBtn" class="main__button">Log In with Google</button>
           </div>
           <div class="main__image">
             <img src="home.png" alt="Image of bears" />
@@ -99,8 +62,8 @@
       // Function to handle the fade-in effect
       function fadeInOnScroll() {
         const sections = document.querySelectorAll('section');
-
-        sections.forEach((section) => {
+        
+        sections.forEach(section => {
           if (isInViewport(section)) {
             section.classList.add('section-visible');
           }
@@ -112,6 +75,46 @@
       });
 
       fadeInOnScroll();
+    </script>
+
+    <!-- Firebase Authentication Script -->
+    <script>
+      // Firebase config (replace with your config values)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCd-bvBO0teOhwNMquREnRHh8v-WnhBk2Y",
+        authDomain: "healthcare-82f91.firebaseapp.com",
+        projectId: "healthcare-82f91",
+        storageBucket: "healthcare-82f91.firebasestorage.app",
+        messagingSenderId: "480612792955",
+        appId: "1:480612792955:web:79735463d434f2b6dec0de",
+        measurementId: "G-L2PWVB5N5L"
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      // Set up Google sign-in provider
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      // Handle login button click (Google login)
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            console.log("User signed in:", user);
+            // Redirect to main chat page after login
+            window.location.href = "mainChatbot.html";
+          })
+          .catch((error) => {
+            console.error("Error signing in:", error.message);
+            // Handle specific errors (e.g., canceled popup, etc.)
+            if (error.code === 'auth/cancelled-popup-request') {
+              console.log("Popup closed or cancelled");
+            }
+            // Handle other errors
+          });
+      });
     </script>
   </body>
 </html>
