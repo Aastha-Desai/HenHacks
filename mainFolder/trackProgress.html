@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Month Calendar</title>
     <link rel="stylesheet" href="trackProgress.css">
 </head>
+
 <body>
     <div class="sidebar">
         <h2>Welcome User</h2>
@@ -30,10 +32,13 @@
                             <th>Sat</th>
                         </tr>
                     </thead>
-                    <tbody id="calendarBody"></tbody>
+                    <div id="containTable">
+                        <tbody id="calendarBody"></tbody>
+                    </div>
                 </table>
                 <div id="sliderContainer">
-                    <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
+                    <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()"
+                        onblur="hideSlider()">
                 </div>
             </div>
         </div>
@@ -49,13 +54,13 @@
             const month = today.getMonth();
             const year = today.getFullYear();
             document.getElementById("monthYear").innerText = today.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
-            
+
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
+
             let calendarBody = "";
             let date = 1;
-            
+
             for (let i = 0; i < 6; i++) {
                 let row = "<tr>";
                 for (let j = 0; j < 7; j++) {
@@ -75,10 +80,10 @@
                 calendarBody += row;
                 if (date > daysInMonth) break;
             }
-            
+
             document.getElementById("calendarBody").innerHTML = calendarBody;
         }
-        
+
         function pickColor(cell, date) {
             selectedCell = cell;
             selectedCell.dataset.date = date;
@@ -86,14 +91,14 @@
             sliderContainer.style.display = "flex";
             valueSlider.focus();
         }
-        
+
         function updateColor() {
             if (selectedCell) {
                 let value = valueSlider.value;
                 selectedCell.setAttribute("data-value", value);
                 selectedCell.style.backgroundColor = getColor(value);
                 let date = selectedCell.dataset.date;
-                
+
                 if (value !== "") {
                     moodData[date] = value; // Only add if there is a value
                 } else {
@@ -101,7 +106,7 @@
                 }
             }
         }
-        
+
         function hideSlider() {
             sliderContainer.style.display = "none";
         }
@@ -111,8 +116,9 @@
             let green = value > 50 ? 255 : Math.round(value * 5.1);
             return `rgb(${red}, ${green}, 0)`;
         }
-        
+
         generateCalendar();
     </script>
 </body>
+
 </html>
