@@ -20,22 +20,22 @@
         <div class="calendar-container">
             <div class="calendar">
                 <h2 id="monthYear"></h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <div id="containTable">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
                         <tbody id="calendarBody"></tbody>
-                    </div>
-                </table>
+                    </table>
+                </div>
                 <div id="sliderContainer">
                     <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()"
                         onblur="hideSlider()">

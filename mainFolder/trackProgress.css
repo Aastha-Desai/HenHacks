@@ -12,7 +12,6 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    border-radius: 25px;
 }
 .sidebar a {
     display: block;
@@ -28,12 +27,26 @@ body {
     text-align: center;
     flex-grow: 1;
 }
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .calendar {
     background: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     position: relative;
+}
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5cm;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 table {
     width: 100%;
