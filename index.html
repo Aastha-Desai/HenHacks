@@ -6,20 +6,62 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; connect-src *;">
     <title>Login with Google</title>
     <link rel="stylesheet" href="index.css">
+    
     <!-- Add Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+      // Firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCd-bvBO0teOhwNMquREnRHh8v-WnhBk2Y",
+        authDomain: "healthcare-82f91.firebaseapp.com",
+        projectId: "healthcare-82f91",
+        storageBucket: "healthcare-82f91.firebasestorage.app",
+        messagingSenderId: "480612792955",
+        appId: "1:480612792955:web:79735463d434f2b6dec0de",
+        measurementId: "G-L2PWVB5N5L"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Set up Google sign-in provider
+      const provider = new GoogleAuthProvider();
+
+      // Handle login button click (Google login)
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            const user = result.user;
+            console.log("User signed in:", user);
+            // Redirect to main chat page after login
+            window.location.href = "mainChatbot.html";
+          })
+          .catch((error) => {
+            console.error("Error signing in:", error.message);
+            if (error.code === 'auth/cancelled-popup-request') {
+              console.log("Popup closed or cancelled");
+            }
+          });
+      });
+    </script>
   </head>
   <body>
     <!-- Section 1: This will contain specific styles for this section only -->
     <section class="section1">
       <header class="header" role="banner" aria-label="The Top">
         <div class="header__wrapper">
+<<<<<<< HEAD
+          <h1 class="header__logo">ChillBot</h1>
+=======
           <h1 class="header__logo">ChillMate</h1>
+>>>>>>> bb7582e69657a46683c6207b62710a5f687e5b2f
           <nav class="[ nav ] [ flow ]" aria-role="navigation">
             <ul class="nav__list" role="list">
               <li class="nav__item"><a class="active" href="#">Home</a></li>
-              <li class="nav__item"><a href="#">About</a></li>
+              <li class="nav__item"><a href="#section2">About</a></li>
               <li class="nav__item"><a href="#">Features</a></li>
               <li class="nav__item"><a href="#">Blog</a></li>
               <li class="nav__item"><a href="#">Team</a></li>
@@ -32,10 +74,10 @@
         <div class="main__content">
           <div class="main__text">
             <h2 class="main__heading">
-              <span class="line1">Bring Yourself</span><br />
-              <span class="line2">To The Top</span>
+              <span class="line1">Your Campus</span><br />
+              <span class="line2">Campanion</span>
             </h2>
-            <p class="main__sub">Stop looking for a secret trick and recognize that the best version of yourself should be your vision, not anybody else’s</p>
+            <p class="main__sub">Navigate college life with confidence—your AI companion for wellness, productivity, and success.</p>
             <br><button id="loginBtn" class="main__button">Log In with Google</button>
           </div>
           <div class="main__image">
@@ -44,77 +86,52 @@
         </div>
       </main>
     </section>
+    
 
-    <!-- Another Section (This one will not inherit styles from section1) -->
+    <!-- Section 2: Our Mission -->
     <section class="section2">
-      <h1>Another Section</h1>
-      <p>This is a completely new section with no inherited styles.</p>
+      <h1>Our Mission</h1>
+      <div class="section2__content">
+        <!-- Image with rounded corners -->
+        <div class="section2__image">
+          <img src="aboutus.png" alt="Mission Image" />
+        </div>
+        <!-- Text describing the mission -->
+        <div class="section2__text">
+          <h2>Lets work together</h2>
+          <p>We are dedicated to supporting students in their academic and personal growth. Our mission is to provide guidance, motivation, and tools to help you stay organized, reduce stress, and achieve success—both in and out of the classroom.</p>
+        </div>
+      </div>
     </section>
 
     <!-- JavaScript for fade-in effect -->
     <script>
-      // Function to check if an element is in the viewport
-      function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return rect.top <= window.innerHeight && rect.bottom >= 0;
-      }
+   // Function to check if an element is in the viewport
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0;
+}
 
-      // Function to handle the fade-in effect
-      function fadeInOnScroll() {
-        const sections = document.querySelectorAll('section');
-        
-        sections.forEach(section => {
-          if (isInViewport(section)) {
-            section.classList.add('section-visible');
-          }
-        });
-      }
+// Function to handle the fade-in effect
+function fadeInOnScroll() {
+  const sections = document.querySelectorAll('section');
+  
+  sections.forEach(section => {
+    if (isInViewport(section)) {
+      section.classList.add('section-visible');
+    } else {
+      // Remove fade-in effect when the section is out of the viewport
+      section.classList.remove('section-visible');
+    }
+  });
+}
 
-      window.addEventListener('scroll', () => {
-        window.requestAnimationFrame(fadeInOnScroll);
-      });
+window.addEventListener('scroll', () => {
+  window.requestAnimationFrame(fadeInOnScroll);
+});
 
-      fadeInOnScroll();
-    </script>
+fadeInOnScroll();
 
-    <!-- Firebase Authentication Script -->
-    <script>
-      // Firebase config (replace with your config values)
-      const firebaseConfig = {
-        apiKey: "AIzaSyCd-bvBO0teOhwNMquREnRHh8v-WnhBk2Y",
-        authDomain: "healthcare-82f91.firebaseapp.com",
-        projectId: "healthcare-82f91",
-        storageBucket: "healthcare-82f91.firebasestorage.app",
-        messagingSenderId: "480612792955",
-        appId: "1:480612792955:web:79735463d434f2b6dec0de",
-        measurementId: "G-L2PWVB5N5L"
-      };
-
-      // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-
-      // Set up Google sign-in provider
-      const provider = new firebase.auth.GoogleAuthProvider();
-
-      // Handle login button click (Google login)
-      document.getElementById("loginBtn").addEventListener("click", () => {
-        auth.signInWithPopup(provider)
-          .then((result) => {
-            const user = result.user;
-            console.log("User signed in:", user);
-            // Redirect to main chat page after login
-            window.location.href = "mainChatbot.html";
-          })
-          .catch((error) => {
-            console.error("Error signing in:", error.message);
-            // Handle specific errors (e.g., canceled popup, etc.)
-            if (error.code === 'auth/cancelled-popup-request') {
-              console.log("Popup closed or cancelled");
-            }
-            // Handle other errors
-          });
-      });
     </script>
   </body>
 </html>
