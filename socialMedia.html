@@ -1,0 +1,57 @@
+<div style="width: 960px; margin: 0 auto; padding-top: 80px; padding-bottom: 80px;">
+    <link rel="stylesheet" href="socialMedia.css">
+    
+    <header>
+        <h1>Chill Chat</h1>
+      </header>
+  
+    <!-- Posts Container -->
+    <div class="wrapper">
+      <!-- First Post (Stacy) -->
+      <div class="testimonial-quote group">
+        <img src="stacy.jpg" class="profile-picture"> <!-- Add Stacy's profile picture -->
+        <div class="quote-container">
+          <blockquote>
+            <p>Hope everyone is having a good day! Here is a picture of my cat 🐈</p>
+            <img src="cat.jpg" alt="cat" style="width: 120px; height: 120px;">
+          </blockquote>  
+          <cite>
+            <span>Stacy Williams</span><br>
+            Freshman | Computer Science
+          </cite>
+        </div>
+      </div>
+  
+      <hr style="margin: 60px auto; opacity: .5;">
+  
+      <!-- Second Post (Cecilia) -->
+      <div class="testimonial-quote group">
+        <img src="cecilia.jpg" class="profile-picture"> 
+        <div class="quote-container">
+          <blockquote>
+            <p>I'm feeling horrible ☹️. I am just excited to eat mac and cheese for dinner.</p>
+          </blockquote>  
+          <cite>
+            <span>Cecilia Jones</span><br>
+            Sophomore | Pre-Medical Diagnositics
+          </cite>
+        </div>
+      </div>
+  
+      <hr style="margin: 60px auto; opacity: .5;">
+    </div>
+  
+    <!-- Add Post Button -->
+    <button id="addPostButton">+</button>
+  
+    <!-- Post Form -->
+    <div id="postForm" style="display: none;">
+      <form id="newPostForm">
+        <textarea id="thoughts" placeholder="Share your thoughts..."></textarea>
+        <input type="file" id="imageUpload" accept="image/*">
+        <button type="submit">Post</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="socialMedia.js"></script>
