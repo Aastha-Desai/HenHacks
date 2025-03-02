@@ -228,6 +228,11 @@ body {
   text-align: center;
 }
 
+.section2 p {
+  font-size: 40px;
+
+}
+
 /* Flexbox layout */
 .section2__content {
   display: flex;
