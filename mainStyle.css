@@ -7,7 +7,7 @@ body {
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #f3f1ec;
+    background-color: #ececf3;
     color: black;
     padding: 20px;
     position: fixed;
@@ -23,8 +23,12 @@ body {
     background-color: #575757;
 }
 .content {
-    margin-left: 270px;
+    margin-left: 330px;
+    width: 50px;
     padding: 20px;
     text-align: center;
     flex-grow: 1;
+    background-color: linear-gradient(to bottom, #819edb, #eff0ef) ;
+    border-radius: 25px;
+    height: 750px;
 }
