@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; connect-src *;">
     <title>Login with Google</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Add Firebase SDK -->
     <script type="module">
@@ -78,10 +79,8 @@
           <nav class="[ nav ] [ flow ]" aria-role="navigation">
             <ul class="nav__list" role="list">
               <li class="nav__item"><a class="active" href="#">Home</a></li>
-              <li class="nav__item"><a href="#section2">About</a></li>
-              <li class="nav__item"><a href="#">Features</a></li>
-              <li class="nav__item"><a href="#">Blog</a></li>
-              <li class="nav__item"><a href="#">Team</a></li>
+              <li class="nav__item"><a href="#aboutus">About</a></li>
+              <li class="nav__item"><a href="#features">Features</a></li>
             </ul>
           </nav>
         </div>
@@ -106,7 +105,7 @@
     
 
     <!-- Section 2: Our Mission -->
-    <section class="section2">
+    <section id = "aboutus" class="section2">
       <h1>Our Mission</h1>
       <div class="section2__content">
         <!-- Image with rounded corners -->
@@ -121,14 +120,14 @@
         </div>
       </div>
     </section>
-    <section id="features">
+    <section id="features" class="section3">
       <br> <h1 class="feature-title">Our Features</h1>
       <br>
       <div class="features-container">
         <div class="feature-item" id="chatbot">
           <img src="chatbot.png" alt="Chat Bot AI" class="feature-image">
           <p class="feature-name">Chat Bot AI</p>
-          <p class="feature-description">An intelligent assistant powered by AI to help you!</p>
+          <p class="feature-descriptison">An intelligent assistant powered by AI to help you!</p>
         </div>
         <div class="feature-item" id="track-progress">
           <img src="progress.png" alt="Track Progress" class="feature-image">
@@ -144,19 +143,41 @@
     </section>
     
     <!-- Footer Section -->
-    <footer id="footer">
-      <div class="footer-container">
-        <div class="footer-info">
-          <p>ChillBot</p>
-          <p><a href="mailto:chillbot@example.com">chillbot@example.com</a></p>
-        </div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">Privacy Policy</a>
-          <a href="#" class="footer-link">Terms of Service</a>
-          <a href="#" class="footer-link">Resources</a>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li><a href="#aboutus">about us</a></li>
+              <li><a href="#features">our services</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+              <li><a href="https://www.wellnessinmind.org/frequently-asked-questions/">FAQ</a></li>
+              <li><a href = "https://www.nami.org/">Learn More</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="https://dana.org/article/can-social-prescriptions-improve-cognitive-and-mental-health/?gad_source=1&gclid=Cj0KCQiAoJC-BhCSARIsAPhdfSgLfPHQmHgLJiQaOmm0QokLr4cKzb-Bs37qn-Os0GteP_zExvSlghYaAn6tEALw_wcB">Article1</a></li>
+              <li><a href="https://www.helpguide.org/mental-health/wellbeing/building-better-mental-health">Article2</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
+   </footer>
+ 
 
     <!-- JavaScript for fade-in effect -->
     <script>
