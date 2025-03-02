@@ -2,7 +2,7 @@ body {
     display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: white;
+    background: linear-gradient(to bottom, #819edb, #eff0ef);
     background-attachment: fixed;
 }
 

@@ -5,7 +5,6 @@ html, body {
   background: linear-gradient(to bottom, #819edb, #eff0ef); /* Blue to light gray gradient */
   background-attachment: fixed; /* Ensures the gradient scrolls with the page */
   font-family: Arial, sans-serif;
-    background: white;
 }
 
 .sidebar {
