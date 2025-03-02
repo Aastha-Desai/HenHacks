@@ -21,6 +21,8 @@ body {
 .sidebar a:hover {
     background-color: #696973;
     border-radius: 25px;
+    padding: 4px;
+    color: rgb(193, 193, 255)
 }
 .content {
     margin-left: 270px;
