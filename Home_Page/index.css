@@ -333,11 +333,16 @@ body {
 
 /* SECTION 1 SPECIFIC STYLES */
 .section1 {
-  background: var(--color-light);
+  background: 
+    radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245)), /* gradient */
+    url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png'); /* pattern */
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Enables parallax effect */
   height: 100vh;
   padding: 2rem;
 }
+
 
 .section1 .header {
   padding-top: 2.5rem;
@@ -581,93 +586,45 @@ body {
 }
 
 /* Global Styles */
+
+.feature-title {
+  text-align: center; /* Centers the text horizontally */
+  font-size: 2.5em; /* Makes the font larger */
+  margin-bottom: 20px; /* Adds space below the title */
+  font-weight: bold; /* Optionally make the text bold */
+}
+
 .features-container {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 50px;
+  justify-content: space-around;
+  gap: 20px;
 }
 
-/* Circle Style */
-.feature-circle {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: white;
-  font-family: Arial, sans-serif;
+.feature-item {
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.feature-circle i {
-  font-size: 50px;
+.feature-image {
+  width: 45%;
+  height: auto;
   transition: transform 0.3s ease;
-  opacity: 0.8;
 }
 
-/* Background Gradient and Animation */
-#chatbot {
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-}
-
-#track-progress {
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-}
-
-#comment-post {
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-}
-
-/* Hover Effect - Enlarging and Glowing */
-.feature-circle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.feature-circle:hover i {
-  transform: scale(1.2);
-  opacity: 1;
+.feature-item:hover .feature-image {
+  transform: scale(1.05);
 }
 
 .feature-name {
-  font-size: 18px;
-  font-weight: bold;
-  position: absolute;
-  transition: opacity 0.3s ease;
+  font-size: 1.2em;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .feature-description {
-  font-size: 14px;
-  position: absolute;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s 0.3s;
-}
-
-.feature-circle:hover .feature-name {
-  opacity: 0;
-}
-
-.feature-circle:hover .feature-description {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s ease, visibility 0s 0s;
-}
-
-/* Center and Style the "Our Features" Heading */
-#features h1 {
-  font-size: 36px; /* Increase font size */
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Add some space below the heading */
-  font-family: Arial, sans-serif; /* Set a modern font */
-  font-weight: bold; /* Make the font bold */
-  color: #333; /* Set a darker color for contrast */
+  font-size: 1em;
+  color: gray;
 }
 
 
@@ -738,3 +695,58 @@ body {
   background-color: #f9f9f9; /* Optional, just to make it more distinct */
 }
 
+
+/* Bubbles container */
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Ensures it doesn’t interfere with clicks */
+}
+
+/* Individual bubble styles */
+.bubble {
+  position: absolute;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+  opacity: 0.6;
+}
+
+/* Different sizes for bubbles */
+.bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 5s; left: 20%; }
+.bubble:nth-child(3) { width: 15px; height: 15px; animation-duration: 7s; left: 40%; }
+.bubble:nth-child(4) { width: 30px; height: 30px; animation-duration: 6s; left: 60%; }
+.bubble:nth-child(5) { width: 20px; height: 20px; animation-duration: 8s; left: 80%; }
+.bubble:nth-child(6) { width: 22px; height: 22px; animation-duration: 6.5s; left: 10%; }
+
+/* Floating animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+
+.aboutus-image {
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.aboutus-image:hover {
+  filter: drop-shadow(0px 0px 15px rgba(104, 160, 245, 0.8)); /* Blue glow effect */
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
