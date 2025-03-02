@@ -16,7 +16,7 @@
         <h1>Welcome</h1>
         <p>This is the main content area.</p>
         <script>
-        async function generateResponse() {
+                   async function generateResponse() {
             const userPrompt = document.getElementById("userPrompt").value;
             const responseElement = document.getElementById("response");
             
@@ -28,8 +28,7 @@
             responseElement.innerText = "...";
             
             try {
-                const apiKey = "AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo";
-                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" + apiKey;
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo";
                 
                 const response = await fetch(url, {
                     method: "POST",
@@ -48,7 +47,7 @@
                 console.error(error);
             }
         }
-    </script>
+        </script>
         <input type="text" id="userPrompt" placeholder="Enter your prompt here">
         <button onclick="generateResponse()">Generate</button>
         <p id="response"></p>
