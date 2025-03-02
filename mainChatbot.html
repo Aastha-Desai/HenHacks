@@ -16,5 +16,42 @@
         <h1>Welcome</h1>
         <p>This is the main content area.</p>
     </div>
+        <script>
+        async function generateResponse() {
+            const userPrompt = document.getElementById("userPrompt").value;
+            const responseElement = document.getElementById("response");
+            
+            if (!userPrompt.trim()) {
+                responseElement.innerText = "Please enter a prompt.";
+                return;
+            }
+            
+            responseElement.innerText = "Generating response...";
+            
+            try {
+                const apiKey = "AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo";
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" + apiKey;
+                
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userPrompt }] }]
+                    })
+                });
+                
+                const data = await response.json();
+                responseElement.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+            } catch (error) {
+                responseElement.innerText = "Error generating response. Please try again.";
+                console.error(error);
+            }
+        }
+    </script>
+    <input type="text" id="userPrompt" placeholder="Enter your prompt here">
+    <button onclick="generateResponse()">Generate</button>
+    <p id="response"></p>
 </body>
 </html>
