@@ -28,7 +28,7 @@ body {
     padding: 20px;
     text-align: center;
     flex-grow: 1;
-    background-color: #edeaea;
+    background-color: linear-gradient(to bottom, #819edb, #eff0ef) ;
     border-radius: 25px;
     height: 750px;
 }
