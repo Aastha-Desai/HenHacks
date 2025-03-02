@@ -3,32 +3,6 @@
 <head>
   <title>Gemini AI Chat</title>
   <style>
-    body{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #ebebf3;
-    color: black;
-    padding: 20px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    }
-    .sidebar a {
-    display: block;
-    color: black;
-    padding: 10px 0;
-    }
-    .sidebar a:hover {
-    background-color: #d7d7e1;
-    }
-    .surrounding{
-        padding: 20px;
-        border-radius: 24px;
-        background-color: #aec1ff;
-    }
     #chat-container {
       width: 500px;
       margin: 20px auto;
@@ -36,7 +10,6 @@
       padding: 10px;
       height: 400px;
       overflow-y: scroll;
-      background: white;
     }
     #input-container {
       width: 500px;
@@ -53,32 +26,23 @@
     .user-message {
       text-align: right;
       margin-bottom: 5px;
-      color: rgb(0, 0, 0);
+      color: blue;
       word-wrap: break-word;
     }
     .bot-message {
       text-align: left;
       margin-bottom: 5px;
-      color: rgb(0, 0, 0);
+      color: green;
       word-wrap: break-word;
     }
   </style>
 </head>
-
-<div class="sidebar">
-    <h2>Welcome User</h2>
-    <a href="mainFolder/trackProgress.html">Follow goals</a>
-    <a href="mainChatbot.html">Talk to chill-bot</a>
-</div> 
-
 <body>
-<div id="surrounding">
   <div id="chat-container"></div>
   <div id="input-container">
     <input type="text" id="user-input" placeholder="Type your message...">
     <button id="send-button">Send</button>
   </div>
-</div>
 
   <script>
     const chatContainer = document.getElementById("chat-container");
@@ -96,7 +60,7 @@
       appendBotMessage("...");
 
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo`;
 
         const response = await fetch(url, {
           method: "POST",

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin Board</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        #postForm {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #posts {
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+        .post {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post strong {
+            display: block;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Bulletin Board</h2>
+
+    <div id="postForm">
+        <input type="text" id="usernameInput" placeholder="Enter your name">
+        <textarea id="messageInput" placeholder="Write something..."></textarea><br>
+        <button onclick="addPost()">Post</button>
+    </div>
+
+    <div id="posts"></div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCGzzeqxkUQec_z34GRY3HWgN2GEQ2ay7E",
+            authDomain: "posts-online.firebaseapp.com",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "posts-online",
+            storageBucket: "posts-online.firebasestorage.app",
+            messagingSenderId: "170859257770",
+            appId: "1:170859257770:web:bfc18cd8161c596c4855d3"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        function addPost() {
+            let username = document.getElementById("usernameInput").value;
+            let message = document.getElementById("messageInput").value;
+            if (username.trim() === "" || message.trim() === "") {
+                alert("Both name and message are required!");
+                return;
+            }
+
+            let newPostRef = database.ref('posts').push();
+            newPostRef.set({
+                username: username,
+                message: message,
+                timestamp: Date.now()
+            });
+
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("messageInput").value = "";
+        }
+
+        function loadPosts() {
+            let postContainer = document.getElementById("posts");
+            postContainer.innerHTML = "";
+
+            database.ref('posts').orderByChild('timestamp').on("value", (snapshot) => {
+                postContainer.innerHTML = "";
+                snapshot.forEach((childSnapshot) => {
+                    let postData = childSnapshot.val();
+                    let postElement = document.createElement("div");
+                    postElement.classList.add("post");
+                    postElement.innerHTML = `<strong>${postData.username}</strong><p>${postData.message}</p>`;
+                    postContainer.appendChild(postElement);
+                });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadPosts);
+    </script>
+
+</body>
+</html>
