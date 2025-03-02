@@ -2,7 +2,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  background: linear-gradient(to bottom, #81bedb, #eff0ef); /* Blue to light gray gradient */
+  background: linear-gradient(to bottom, #819edb, #eff0ef); /* Blue to light gray gradient */
   background-attachment: fixed; /* Ensures the gradient scrolls with the page */
 }
 
