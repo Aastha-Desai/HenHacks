@@ -23,10 +23,12 @@ body {
     background-color: #575757;
 }
 .content {
-    margin-left: 270px;
+    margin-left: 330px;
+    width: 50px;
     padding: 20px;
     text-align: center;
     flex-grow: 1;
     background-color: #edeaea;
     border-radius: 25px;
+    height: 750px;
 }
