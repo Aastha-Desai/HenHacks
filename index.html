@@ -11,6 +11,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
       import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+      import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"; // Import Realtime Database SDK
 
       // Firebase config
       const firebaseConfig = {
@@ -26,6 +27,7 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const db = getDatabase(app); // Initialize Firebase Realtime Database
 
       // Set up Google sign-in provider
       const provider = new GoogleAuthProvider();
@@ -36,8 +38,19 @@
           .then((result) => {
             const user = result.user;
             console.log("User signed in:", user);
-            // Redirect to main chat page after login
-            window.location.href = "mainChatbot.html";
+            // Store the user info in Realtime Database
+            const userRef = ref(db, 'users/' + user.uid);
+            set(userRef, {
+              username: user.displayName,
+              email: user.email,
+              profile_picture: user.photoURL
+            }).then(() => {
+              console.log('User data saved to Realtime Database');
+              // Redirect to main chat page after login
+              window.location.href = "mainChatbot.html";
+            }).catch((error) => {
+              console.error("Error saving user data:", error);
+            });
           })
           .catch((error) => {
             console.error("Error signing in:", error.message);
@@ -53,11 +66,7 @@
     <section class="section1">
       <header class="header" role="banner" aria-label="The Top">
         <div class="header__wrapper">
-<<<<<<< HEAD
           <h1 class="header__logo">ChillBot</h1>
-=======
-          <h1 class="header__logo">ChillMate</h1>
->>>>>>> bb7582e69657a46683c6207b62710a5f687e5b2f
           <nav class="[ nav ] [ flow ]" aria-role="navigation">
             <ul class="nav__list" role="list">
               <li class="nav__item"><a class="active" href="#">Home</a></li>
@@ -103,35 +112,76 @@
         </div>
       </div>
     </section>
+    <section id="features">
+      <br><h1>Our Features</h1>
+      <br>
+      <div class="features-container">
+        <div class="feature-circle" id="chatbot">
+          <i class="fas fa-robot"></i>
+          <p class="feature-name">Chat Bot AI</p>
+          <p class="feature-description">An intelligent assistant powered by AI to help you!</p>
+        </div>
+        <div class="feature-circle" id="track-progress">
+          <i class="fas fa-chart-line"></i>
+          <p class="feature-name">Track Progress</p>
+          <p class="feature-description">Track your learning and growth over time.</p>
+        </div>
+        <div class="feature-circle" id="comment-post">
+          <i class="fas fa-comment-alt"></i>
+          <p class="feature-name">Comment & Post</p>
+          <p class="feature-description">Engage with posts and leave comments on content.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer id="footer">
+      <div class="footer-container">
+        <div class="footer-info">
+          <p>ChillBot</p>
+          <p><a href="mailto:chillbot@example.com">chillbot@example.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Resources</a>
+        </div>
+      </div>
+    </footer>
 
     <!-- JavaScript for fade-in effect -->
     <script>
-   // Function to check if an element is in the viewport
-function isInViewport(element) {
-  const rect = element.getBoundingClientRect();
-  return rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0;
-}
+      // Function to check if an element is in the viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0;
+      }
 
-// Function to handle the fade-in effect
-function fadeInOnScroll() {
-  const sections = document.querySelectorAll('section');
-  
-  sections.forEach(section => {
-    if (isInViewport(section)) {
-      section.classList.add('section-visible');
-    } else {
-      // Remove fade-in effect when the section is out of the viewport
-      section.classList.remove('section-visible');
-    }
-  });
-}
+      // Function to handle the fade-in effect
+      function fadeInOnScroll() {
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+          if (isInViewport(section)) {
+            section.classList.add('section-visible');
+          } else {
+            // Remove fade-in effect when the section is out of the viewport
+            section.classList.remove('section-visible');
+          }
+        });
+      }
 
-window.addEventListener('scroll', () => {
-  window.requestAnimationFrame(fadeInOnScroll);
-});
+      window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(fadeInOnScroll);
+      });
 
-fadeInOnScroll();
+      fadeInOnScroll();
 
+      document.querySelectorAll('.feature-circle').forEach(circle => {
+        circle.addEventListener('mouseover', () => {
+          // You can add extra interaction here if needed, like showing a tooltip or text change
+        });
+      });
     </script>
   </body>
 </html>
