@@ -27,4 +27,6 @@ body {
     padding: 20px;
     text-align: center;
     flex-grow: 1;
+    background-color: #edeaea;
+    border-radius: 25px;
 }
