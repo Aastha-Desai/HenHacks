@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; connect-src *;">
+    <title>Login with Google</title>
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- Add Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+      import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"; // Import Realtime Database SDK
+
+      // Firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCd-bvBO0teOhwNMquREnRHh8v-WnhBk2Y",
+        authDomain: "healthcare-82f91.firebaseapp.com",
+        projectId: "healthcare-82f91",
+        storageBucket: "healthcare-82f91.firebasestorage.app",
+        messagingSenderId: "480612792955",
+        appId: "1:480612792955:web:79735463d434f2b6dec0de",
+        measurementId: "G-L2PWVB5N5L"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getDatabase(app); // Initialize Firebase Realtime Database
+
+      // Set up Google sign-in provider
+      const provider = new GoogleAuthProvider();
+
+      // Handle login button click (Google login)
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            const user = result.user;
+            console.log("User signed in:", user);
+            // Store the user info in Realtime Database
+            const userRef = ref(db, 'users/' + user.uid);
+            set(userRef, {
+              username: user.displayName,
+              email: user.email,
+              profile_picture: user.photoURL
+            }).then(() => {
+              console.log('User data saved to Realtime Database');
+              // Redirect to main chat page after login
+              window.location.href = "mainChatbot.html";
+            }).catch((error) => {
+              console.error("Error saving user data:", error);
+            });
+          })
+          .catch((error) => {
+            console.error("Error signing in:", error.message);
+            if (error.code === 'auth/cancelled-popup-request') {
+              console.log("Popup closed or cancelled");
+            }
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Section 1: This will contain specific styles for this section only -->
+    <section class="section1">
+      <header class="header" role="banner" aria-label="The Top">
+        <div class="header__wrapper">
+          <h1 class="header__logo">ChillBot</h1>
+          <nav class="[ nav ] [ flow ]" aria-role="navigation">
+            <ul class="nav__list" role="list">
+              <li class="nav__item"><a class="active" href="#">Home</a></li>
+              <li class="nav__item"><a href="#section2">About</a></li>
+              <li class="nav__item"><a href="#">Features</a></li>
+              <li class="nav__item"><a href="#">Blog</a></li>
+              <li class="nav__item"><a href="#">Team</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="[ flow ] [ main ]">
+        <div class="main__content">
+          <div class="main__text">
+            <h2 class="main__heading">
+              <span class="line1">Your Campus</span><br />
+              <span class="line2">Campanion</span>
+            </h2>
+            <p class="main__sub">Navigate college life with confidence—your AI companion for wellness, productivity, and success.</p>
+            <br><button id="loginBtn" class="main__button">Log In with Google</button>
+          </div>
+          <div class="main__image">
+            <img src="home.png" alt="Image of bears" />
+          </div>
+        </div>
+      </main>
+    </section>
+    
+
+    <!-- Section 2: Our Mission -->
+    <section class="section2">
+      <h1>Our Mission</h1>
+      <div class="section2__content">
+        <!-- Image with rounded corners -->
+        <div class="section2__image">
+          <img src="aboutus.png" alt="Mission Image" />
+        </div>
+        <!-- Text describing the mission -->
+        <div class="section2__text">
+          <h2>Lets work together</h2>
+          <p>We are dedicated to supporting students in their academic and personal growth. Our mission is to provide guidance, motivation, and tools to help you stay organized, reduce stress, and achieve success—both in and out of the classroom.</p>
+        </div>
+      </div>
+    </section>
+    <section id="features">
+      <br><h1>Our Features</h1>
+      <br>
+      <div class="features-container">
+        <div class="feature-circle" id="chatbot">
+          <i class="fas fa-robot"></i>
+          <p class="feature-name">Chat Bot AI</p>
+          <p class="feature-description">An intelligent assistant powered by AI to help you!</p>
+        </div>
+        <div class="feature-circle" id="track-progress">
+          <i class="fas fa-chart-line"></i>
+          <p class="feature-name">Track Progress</p>
+          <p class="feature-description">Track your learning and growth over time.</p>
+        </div>
+        <div class="feature-circle" id="comment-post">
+          <i class="fas fa-comment-alt"></i>
+          <p class="feature-name">Comment & Post</p>
+          <p class="feature-description">Engage with posts and leave comments on content.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer id="footer">
+      <div class="footer-container">
+        <div class="footer-info">
+          <p>ChillBot</p>
+          <p><a href="mailto:chillbot@example.com">chillbot@example.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Resources</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript for fade-in effect -->
+    <script>
+      // Function to check if an element is in the viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0;
+      }
+
+      // Function to handle the fade-in effect
+      function fadeInOnScroll() {
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+          if (isInViewport(section)) {
+            section.classList.add('section-visible');
+          } else {
+            // Remove fade-in effect when the section is out of the viewport
+            section.classList.remove('section-visible');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(fadeInOnScroll);
+      });
+
+      fadeInOnScroll();
+
+      document.querySelectorAll('.feature-circle').forEach(circle => {
+        circle.addEventListener('mouseover', () => {
+          // You can add extra interaction here if needed, like showing a tooltip or text change
+        });
+      });
+    </script>
+  </body>
+</html>
