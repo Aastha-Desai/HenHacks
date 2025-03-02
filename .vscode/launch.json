@@ -7,8 +7,8 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open mainChatbot.html",
-            "file": "c:\\Users\\varsh\\OneDrive\\Desktop\\HenHacks\\mainChatbot.html"
+            "name": "Open index.html",
+            "file": "c:\\Users\\varsh\\OneDrive\\Desktop\\HenHacks\\Home_Page\\index.html"
         }
     ]
 }
