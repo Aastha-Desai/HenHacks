@@ -6,6 +6,24 @@ body {
     background-attachment: fixed;
 }
 
+header {
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: black; /* White text for the header */
+  }
+
 .sidebar {
     width: 250px;
     height: 100vh;
