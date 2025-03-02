@@ -1,61 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Navigation</title>
-    <link rel="stylesheet" href="mainStyle.css">
+  <title>Gemini AI Chat</title>
+  <style>
+    #chat-container {
+      width: center;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 400px;
+      overflow-y: scroll;
+    }
+    #input-container {
+      width: 500px;
+      margin: 0 auto;
+      display: flex;
+    }
+    #user-input {
+      flex: 1;
+      padding: 5px;
+    }
+    #send-button {
+      padding: 5px 10px;
+    }
+    .user-message {
+      text-align: right;
+      margin-bottom: 5px;
+      color: rgb(0, 0, 0);
+      word-wrap: break-word;
+    }
+    .bot-message {
+      text-align: left;
+      margin-bottom: 5px;
+      color: rgb(0, 0, 0);
+      word-wrap: break-word;
+    }
+    body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ececf3;
+    color: black;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 10px 0;
+}
+.sidebar a:hover {
+    background-color: #575757;
+}
+.content {
+    margin-left: center;
+    width: center;
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    background-color: linear-gradient(to bottom, #819edb, #eff0ef) ;
+    border-radius: 25px;
+    height: 750px;
+}
+  </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Welcome User</h2>
-        <a href="mainFolder/trackProgress.html">Follow goals</a>
-        <a href="socialMedia.html">Posts from community</a>
-    </div> 
+  <div id="chat-container"></div>
+  <div id="input-container">
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button id="send-button">Send</button>
+  </div>
 
-<head>
-    <div class="content">
-    <title>AI Text Generator</title>
-    <h2>Ask AI</h2>
-    <input type="text" id="userPrompt" placeholder="Enter your prompt here">
-    <button onclick="generateResponse()">Submit</button>
-    <h3>Response:</h3>
-    <p id="response"></p>
-    </div>
-</head>
-<body>
-    <script>
-        async function generateResponse() {
-            const userPrompt = document.getElementById("userPrompt").value;
-            const responseElement = document.getElementById("response");
-            
-            if (!userPrompt.trim()) {
-                responseElement.innerText = "How was your day?";
-                return;
-            }
-            
-            responseElement.innerText = "...";
-            
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo`;
-                
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userPrompt }] }]
-                    })
-                });
-                
-                const data = await response.json();
-                responseElement.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
-            } catch (error) {
-                responseElement.innerText = "Error generating response. Please try again.";
-                console.error(error);
-            }
-        }
-    </script>
+  <script>
+    const chatContainer = document.getElementById("chat-container");
+    const userInput = document.getElementById("user-input");
+    const sendButton = document.getElementById("send-button");
+
+    async function generateResponse() {
+      const userPrompt = userInput.value;
+      if (!userPrompt.trim()) {
+        appendBotMessage("How was your day?");
+        return;
+      }
+
+      appendUserMessage(userPrompt);
+      appendBotMessage("...");
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo`;
+
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: userPrompt }] }]
+          })
+        });
+
+        const data = await response.json();
+        const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+        updateLastBotMessage(botResponse);
+      } catch (error) {
+        updateLastBotMessage("Error generating response. Please try again.");
+        console.error(error);
+      }
+      userInput.value = "";
+    }
+
+    function appendUserMessage(message) {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("user-message");
+      messageElement.textContent = message;
+      chatContainer.appendChild(messageElement);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function appendBotMessage(message) {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("bot-message");
+      messageElement.textContent = message;
+      chatContainer.appendChild(messageElement);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function updateLastBotMessage(message) {
+      const botMessages = chatContainer.getElementsByClassName("bot-message");
+      if (botMessages.length > 0) {
+        botMessages[botMessages.length - 1].textContent = message;
+      }
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    sendButton.addEventListener("click", generateResponse);
+    userInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        generateResponse();
+      }
+    });
+  </script>
 </body>
 </html>
