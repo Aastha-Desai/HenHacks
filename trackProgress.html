@@ -35,6 +35,77 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+    <script>
+        let selectedCell = null;
+        const sliderContainer = document.getElementById("sliderContainer");
+        const valueSlider = document.getElementById("valueSlider");
+        const moodInput = document.getElementById("moodInput");
+        let moodData = {};
+
+        function generateCalendar() {
+            const today = new Date();
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            document.getElementById("monthYear").innerText = today.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            let calendarBody = "";
+            let date = 1;
+
+            for (let i = 0; i < 6; i++) {
+                let row = "<tr>";
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        row += "<td></td>";
+                    } else if (date > daysInMonth) {
+                        row += "<td></td>";
+                    } else {
+                        row += `<td onclick="pickDate(this)" data-date="${date}">${date}</td>`;
+                        date++;
+                    }
+                }
+                row += "</tr>";
+                calendarBody += row;
+                if (date > daysInMonth) break;
+            }
+
+            document.getElementById("calendarBody").innerHTML = calendarBody;
+        }
+
+        function pickDate(cell) {
+            selectedCell = cell;
+            sliderContainer.style.display = "flex";
+            valueSlider.value = 50;
+            moodInput.value = "";
+        }
+
+        function updateColor() {
+            if (selectedCell) {
+                let value = valueSlider.value;
+                selectedCell.style.backgroundColor = getColor(value);
+            }
+        }
+
+        function getColor(value) {
+            let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
+            let green = value > 50 ? 255 : Math.round(value * 5.1);
+            return `rgb(${red}, ${green}, 0)`;
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                sliderContainer.style.display = "none";
+            }
+        });
+
+        generateCalendar();
+    </script>
+</body>
+=======
   <script src="trackProgress.js"></script> 
     </body>
+>>>>>>> ff98f463a0b6f1e19b4a05c0363d43e9b073155a
 </html>
