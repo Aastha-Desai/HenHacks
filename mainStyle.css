@@ -1,34 +1,46 @@
+/* Full-page gradient background */
 body {
     display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
-}
-.sidebar {
+    background: linear-gradient(to bottom, #81bedb, #eff0ef); /* Blue to light gray gradient */
+    background-attachment: fixed; /* Ensures the gradient scrolls with the page */
+    min-height: 100vh; /* Ensure the gradient covers the entire viewport */
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #ececf3;
+    background-color: rgba(236, 236, 243, 0.8); /* Semi-transparent background */
     color: black;
     padding: 20px;
     position: fixed;
     left: 0;
     top: 0;
-}
-.sidebar a {
+    z-index: 1000; /* Ensure the sidebar is above the content */
+  }
+  
+  .sidebar a {
     display: block;
     color: black;
     padding: 10px 0;
-}
-.sidebar a:hover {
-    background-color: #575757;
-}
-.content {
-    margin-left: 330px;
-    width: 50px;
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .sidebar a:hover {
+    background-color: rgba(87, 87, 87, 0.2); /* Semi-transparent hover effect */
+    border-radius: 5px; /* Rounded corners for hover effect */
+  }
+  
+  /* Content Styles */
+  .content {
+    margin-left: 290px; /* Adjust margin to account for the sidebar */
     padding: 20px;
     text-align: center;
     flex-grow: 1;
-    background-color: linear-gradient(to bottom, #819edb, #eff0ef) ;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
     border-radius: 25px;
-    height: 750px;
-}
+    min-height: 750px; /* Ensure the content has a minimum height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
