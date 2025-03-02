@@ -1,0 +1,752 @@
+:root {
+  --color-black: #2A2A2A;
+  --color-text: #777777;
+  --color-light: radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245));
+  --color-text-light: #444444;
+  --font-base-family: 'Manrope', 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --line-height: 1.2;
+}
+
+/* BASE STYLES */
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base-family, sans-serif);
+  color: var(--color-black);
+  line-height: var(--line-height);
+  padding: 0;
+  background-color: #fff;
+}
+
+/* Section 1 Specific Styles */
+.section1 {
+  background: 
+    radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245)), /* gradient */
+    url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png'); /* pattern */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding: 2rem;
+}
+
+
+/* FADE-IN EFFECT */
+.section1, .section2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SECTION 1 SPECIFIC STYLES */
+.section1 {
+  background: var(--color-light);
+  background-size: cover;
+  height: 100vh;
+  padding: 2rem;
+}
+
+.section1 .header {
+  padding-top: 2.5rem;
+}
+
+.section1 .header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section1 .header__logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.section1 .nav {
+  display: flex;
+}
+
+.section1 .nav__list {
+  display: flex;
+  padding-left: 3rem;
+}
+
+.section1 .nav__item {
+  list-style-type: none;
+  padding-left: 2rem;
+}
+
+.section1 a {
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.825rem;
+  text-decoration: none;
+  color: var(--color-black);
+  padding-bottom: 0.5em;
+}
+
+.section1 a.active {
+  border-bottom: 2px solid var(--color-black);
+}
+
+/* Main content */
+.section1 .main__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.section1 .main__text {
+  width: 50%;
+}
+
+.section1 .main__image {
+  width: 50%;
+  text-align: right;
+}
+
+.section1 .main__heading {
+  font-size: 3.6rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: left;
+}
+
+/* Text Animation */
+.section1 .line1,
+.section1 .line2 {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  width: 0;
+}
+
+.section1 .line1 {
+  animation: typing 2s steps(20) forwards;
+}
+
+.section1 .line2 {
+  animation: typing 1s steps(20) 1s forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Subtitle */
+.section1 .main__sub {
+  font-weight: 400;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 38ch;
+}
+
+/* Button */
+.section1 .main__button {
+  background: var(--color-black);
+  color: white;
+  border-radius: 900px;
+  font-size: 0.75rem;
+  width: 10.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.section1 .main__button:hover {
+  background: var(--color-text-light);
+  transform: scale(1.05);
+}
+
+/* IMAGE HOVER ANIMATION */
+.section1 .main__image img {
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.section1 .main__image img:hover {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* Wave Divider */
+.wave {
+  position: relative;
+  height: 50px;
+  background: #fff;
+  margin-top: -1px;
+}
+
+.wave:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png') repeat-x;
+  background-size: contain;
+}
+
+/* Section 2: Our Mission */
+.section2 {
+  background: linear-gradient(to right, #f1f3f6, #d2daff);  
+  padding: 4rem;
+}
+
+.section2 h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Flexbox layout */
+.section2__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Image styling */
+.section2__image img {
+  border-radius: 8px;
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Pulse animation on hover */
+.section2__image img:hover {
+  animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Text styling */
+.section2__text {
+  flex: 1;
+}
+
+.section2__text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section2__text p {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .section1 .main__content {
+    flex-direction: column;
+  }
+
+  .section1 .main__text,
+  .section1 .main__image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section1 .main__heading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  .section1 .main__button {
+    width: 100%;
+  }
+
+  .section2__content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section2__image img {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+this is my css :root {
+  --color-black: #2A2A2A;
+  --color-text: #777777;
+  --color-light: radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245));
+  --color-text-light: #444444;
+  --font-base-family: 'Manrope', 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --line-height: 1.2;
+}
+
+/* BASE STYLES */
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base-family, sans-serif);
+  color: var(--color-black);
+  line-height: var(--line-height);
+  padding: 0;
+  background-color: #fff;
+}
+
+/* FADE-IN EFFECT */
+.section1, .section2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SECTION 1 SPECIFIC STYLES */
+.section1 {
+  background: 
+    radial-gradient(circle, rgb(187, 201, 223), rgb(104, 160, 245)), /* gradient */
+    url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png'); /* pattern */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Enables parallax effect */
+  height: 100vh;
+  padding: 2rem;
+}
+
+
+.section1 .header {
+  padding-top: 2.5rem;
+}
+
+.section1 .header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section1 .header__logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.section1 .nav {
+  display: flex;
+}
+
+.section1 .nav__list {
+  display: flex;
+  padding-left: 3rem;
+}
+
+.section1 .nav__item {
+  list-style-type: none;
+  padding-left: 2rem;
+}
+
+.section1 a {
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.825rem;
+  text-decoration: none;
+  color: var(--color-black);
+  padding-bottom: 0.5em;
+}
+
+.section1 a.active {
+  border-bottom: 2px solid var(--color-black);
+}
+
+/* Main content */
+.section1 .main__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.section1 .main__text {
+  width: 50%;
+}
+
+.section1 .main__image {
+  width: 50%;
+  text-align: right;
+}
+
+.section1 .main__heading {
+  font-size: 3.6rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: left;
+}
+
+/* Text Animation */
+.section1 .line1,
+.section1 .line2 {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  width: 0;
+}
+
+.section1 .line1 {
+  animation: typing 2s steps(20) forwards;
+}
+
+.section1 .line2 {
+  animation: typing 1s steps(20) 1s forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Subtitle */
+.section1 .main__sub {
+  font-weight: 400;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 38ch;
+}
+
+/* Button */
+.section1 .main__button {
+  background: var(--color-black);
+  color: white;
+  border-radius: 900px;
+  font-size: 0.75rem;
+  width: 10.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.section1 .main__button:hover {
+  background: var(--color-text-light);
+  transform: scale(1.05);
+}
+
+/* IMAGE HOVER ANIMATION */
+.section1 .main__image img {
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.section1 .main__image img:hover {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* Wave Divider */
+.wave {
+  position: relative;
+  height: 50px;
+  background: #fff;
+  margin-top: -1px;
+}
+
+.wave:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2020/12/23/08/09/wave-5852622_960_720.png') repeat-x;
+  background-size: contain;
+}
+
+/* Section 2: Our Mission */
+.section2 {
+  background: linear-gradient(to right, #f1f3f6, #d2daff);  
+  padding: 4rem;
+}
+
+.section2 h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Flexbox layout */
+.section2__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Image styling */
+.section2__image img {
+  border-radius: 8px;
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Pulse animation on hover */
+.section2__image img:hover {
+  animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Text styling */
+.section2__text {
+  flex: 1;
+}
+
+.section2__text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section2__text p {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .section1 .main__content {
+    flex-direction: column;
+  }
+
+  .section1 .main__text,
+  .section1 .main__image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section1 .main__heading {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  .section1 .main__button {
+    width: 100%;
+  }
+
+  .section2__content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section2__image img {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* Global Styles */
+
+.feature-title {
+  text-align: center; /* Centers the text horizontally */
+  font-size: 2.5em; /* Makes the font larger */
+  margin-bottom: 20px; /* Adds space below the title */
+  font-weight: bold; /* Optionally make the text bold */
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.feature-item {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-image {
+  width: 45%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-image {
+  transform: scale(1.05);
+}
+
+.feature-name {
+  font-size: 1.2em;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.feature-description {
+  font-size: 1em;
+  color: gray;
+}
+
+
+/* Footer Styling */
+#footer {
+  background-color: #222; /* Dark background for contrast */
+  color: #fff; /* White text for readability */
+  padding: 20px 0; /* Add some padding */
+  text-align: center; /* Center the footer text */
+  font-family: Arial, sans-serif; /* Modern font */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Add padding inside the container */
+}
+
+.footer-info p {
+  margin: 5px 0; /* Add spacing between the text */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Space out the links */
+}
+
+.footer-link {
+  color: #fff; /* White links */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Font size for the links */
+  transition: color 0.3s ease; /* Add transition for color change */
+}
+
+.footer-link:hover {
+  color: #00bfff; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Footer Animation */
+#footer {
+  opacity: 0;
+  animation: fadeIn 1s forwards; /* Fade-in effect */
+  animation-delay: 1s; /* Delay the footer animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* Features Section */
+#features {
+  margin-bottom: 2rem; /* Add some space below the features section */
+}
+
+/* Footer Section */
+#footer {
+  padding-top: 2rem; /* Add space at the top of the footer */
+  background-color: #f9f9f9; /* Optional, just to make it more distinct */
+}
+
+
+/* Bubbles container */
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Ensures it doesn’t interfere with clicks */
+}
+
+/* Individual bubble styles */
+.bubble {
+  position: absolute;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+  opacity: 0.6;
+}
+
+/* Different sizes for bubbles */
+.bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 5s; left: 20%; }
+.bubble:nth-child(3) { width: 15px; height: 15px; animation-duration: 7s; left: 40%; }
+.bubble:nth-child(4) { width: 30px; height: 30px; animation-duration: 6s; left: 60%; }
+.bubble:nth-child(5) { width: 20px; height: 20px; animation-duration: 8s; left: 80%; }
+.bubble:nth-child(6) { width: 22px; height: 22px; animation-duration: 6.5s; left: 10%; }
+
+/* Floating animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+
+.aboutus-image {
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.aboutus-image:hover {
+  filter: drop-shadow(0px 0px 15px rgba(104, 160, 245, 0.8)); /* Blue glow effect */
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
