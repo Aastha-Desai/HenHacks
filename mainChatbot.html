@@ -1,3 +1,4 @@
+here is the html file with js:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
         <h1>Welcome</h1>
         <p>This is the main content area.</p>
         <script>
-                   async function generateResponse() {
+        async function generateResponse() {
             const userPrompt = document.getElementById("userPrompt").value;
             const responseElement = document.getElementById("response");
             
@@ -47,7 +48,7 @@
                 console.error(error);
             }
         }
-        </script>
+    </script>
         <input type="text" id="userPrompt" placeholder="Enter your prompt here">
         <button onclick="generateResponse()">Generate</button>
         <p id="response"></p>
