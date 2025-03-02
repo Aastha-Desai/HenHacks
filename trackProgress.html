@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Month Calendar</title>
+    <link rel="stylesheet" href="trackProgress.css">
+</head>
+<div class="sidebar">
+        <h2>Welcome User</h2>
+        <a href="mainFolder/trackProgress.html">Follow goals</a>
+        <a href="mainChatbot.html">Talk to chill-bot</a>
+    </div> 
+<body>
+    <div class="content">
+        <h1>Welcome</h1>
+        <div class="calendar-container">
+            <div class="calendar">
+                <h2 id="monthYear"></h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendarBody"></tbody>
+                    </table>
+                </div>
+                <div id="sliderContainer">
+                    <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()">
+                    <input type="text" id="moodInput" placeholder="Enter mood note">
+                </div>
+            </div>
+        </div>
+    </div>
+  <script src="trackProgress.js"></script> 
+    </body>
+</html>

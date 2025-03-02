@@ -64,6 +64,14 @@
   <body>
     <!-- Section 1: This will contain specific styles for this section only -->
     <section class="section1">
+      <div class="bubbles">
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+      </div>
       <header class="header" role="banner" aria-label="The Top">
         <div class="header__wrapper">
           <h1 class="header__logo">ChillBot</h1>
@@ -103,7 +111,8 @@
       <div class="section2__content">
         <!-- Image with rounded corners -->
         <div class="section2__image">
-          <img src="aboutus.png" alt="Mission Image" />
+          <img src="aboutus.png" alt="Mission Image" class="aboutus-image">
+
         </div>
         <!-- Text describing the mission -->
         <div class="section2__text">
@@ -113,21 +122,21 @@
       </div>
     </section>
     <section id="features">
-      <br><h1>Our Features</h1>
+      <br> <h1 class="feature-title">Our Features</h1>
       <br>
       <div class="features-container">
-        <div class="feature-circle" id="chatbot">
-          <i class="fas fa-robot"></i>
+        <div class="feature-item" id="chatbot">
+          <img src="chatbot.png" alt="Chat Bot AI" class="feature-image">
           <p class="feature-name">Chat Bot AI</p>
           <p class="feature-description">An intelligent assistant powered by AI to help you!</p>
         </div>
-        <div class="feature-circle" id="track-progress">
-          <i class="fas fa-chart-line"></i>
+        <div class="feature-item" id="track-progress">
+          <img src="progress.png" alt="Track Progress" class="feature-image">
           <p class="feature-name">Track Progress</p>
           <p class="feature-description">Track your learning and growth over time.</p>
         </div>
-        <div class="feature-circle" id="comment-post">
-          <i class="fas fa-comment-alt"></i>
+        <div class="feature-item" id="comment-post">
+          <img src="comment.png" alt="Comment & Post" class="feature-image">
           <p class="feature-name">Comment & Post</p>
           <p class="feature-description">Engage with posts and leave comments on content.</p>
         </div>

@@ -10,11 +10,53 @@
     <div class="sidebar">
         <h2>Welcome User</h2>
         <a href="mainFolder/trackProgress.html">Follow goals</a>
-        <a href="mainFolder/socialMedia.html">Posts from community</a>
-    </div>
+        <a href="socialMedia.html">Chill Chat</a>
+        <a href="mainChatbot.html">Chill-Bot</a>
+    </div> 
+
+<head>
     <div class="content">
-        <h1>Welcome</h1>
-        <p>This is the main content area.</p>
+    <title>AI Text Generator</title>
+    <h2>Ask AI</h2>
+    <input type="text" id="userPrompt" placeholder="Enter your prompt here">
+    <button onclick="generateResponse()">Submit</button>
+    <h3>Response:</h3>
+    <p id="response"></p>
     </div>
+</head>
+<body>
+    <script>
+        async function generateResponse() {
+            const userPrompt = document.getElementById("userPrompt").value;
+            const responseElement = document.getElementById("response");
+            
+            if (!userPrompt.trim()) {
+                responseElement.innerText = "How was your day?";
+                return;
+            }
+            
+            responseElement.innerText = "...";
+            
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDh_bVec1upreE6yiuF0cPFeUTs8CoOfpo`;
+                
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userPrompt }] }]
+                    })
+                });
+                
+                const data = await response.json();
+                responseElement.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+            } catch (error) {
+                responseElement.innerText = "Error generating response. Please try again.";
+                console.error(error);
+            }
+        }
+    </script>
 </body>
 </html>
