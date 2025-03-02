@@ -1,13 +1,14 @@
 body {
     display: flex;
-    margin: 0;
+    margin: fill;
     font-family: Arial, sans-serif;
-    background:linear-gradient(to bottom, #ffffff, #b3d1ff)
+    background: white;;
+    background-attachment: fixed;
 }
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #9fb4f0;
+    background-color: #accaf6;
     color: black;
     padding: 20px;
     position: fixed;
@@ -70,10 +71,12 @@ th {
     bottom: -50px;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
-    flex-direction: column;
     align-items: center;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
 }
 #valueSlider {
     width: 200px;
@@ -119,4 +122,8 @@ th {
     padding: 5px;
     border: 1px solid black;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
