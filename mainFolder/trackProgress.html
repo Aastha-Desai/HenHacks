@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Month Calendar</title>
     <link rel="stylesheet" href="trackProgress.css">
 </head>
+
 <body>
-    <div class="calendar">
-        <h2 id="monthYear"></h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
-            </thead>
-            <tbody id="calendarBody"></tbody>
-        </table>
-        <div id="sliderContainer">
-            <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()" onblur="hideSlider()">
-            
+    <div class="sidebar">
+        <h2>Welcome User</h2>
+        <a href="mainFolder/trackProgress.html">Follow goals</a>
+        <a href="mainFolder/postsPage.html">Posts from community</a>
+    </div>
+    <div class="content">
+        <h1>Welcome</h1>
+        <p>This is the main content area.</p>
+        <div class="calendar-container">
+            <div class="calendar">
+                <h2 id="monthYear"></h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendarBody"></tbody>
+                    </table>
+                </div>
+                <div id="sliderContainer">
+                    <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()"
+                        onblur="hideSlider()">
+                </div>
+            </div>
         </div>
     </div>
-
     <script>
         let selectedCell = null;
         const sliderContainer = document.getElementById("sliderContainer");
         const valueSlider = document.getElementById("valueSlider");
+        let moodData = {}; // Global JSON object to store mood values
 
         function generateCalendar() {
             const today = new Date();
             const month = today.getMonth();
             const year = today.getFullYear();
             document.getElementById("monthYear").innerText = today.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
-            
+
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
+
             let calendarBody = "";
             let date = 1;
-            
+
             for (let i = 0; i < 6; i++) {
                 let row = "<tr>";
                 for (let j = 0; j < 7; j++) {
@@ -54,7 +69,10 @@
                     } else if (date > daysInMonth) {
                         row += "<td></td>";
                     } else {
-                        row += `<td onclick="pickColor(this)" data-value="50">${date}</td>`;
+                        let fullDate = `${year}-${month + 1}-${date}`;
+                        let moodValue = moodData[fullDate] !== undefined ? moodData[fullDate] : "";
+                        let colorStyle = moodValue !== "" ? `style="background-color: ${getColor(moodValue)};"` : "";
+                        row += `<td onclick="pickColor(this, '${fullDate}')" data-value="${moodValue}" ${colorStyle}>${date}</td>`;
                         date++;
                     }
                 }
@@ -62,34 +80,45 @@
                 calendarBody += row;
                 if (date > daysInMonth) break;
             }
-            
+
             document.getElementById("calendarBody").innerHTML = calendarBody;
         }
-        
-        function pickColor(cell) {
+
+        function pickColor(cell, date) {
             selectedCell = cell;
-            valueSlider.value = selectedCell.getAttribute("data-value");
+            selectedCell.dataset.date = date;
+            valueSlider.value = selectedCell.getAttribute("data-value") || 50;
             sliderContainer.style.display = "flex";
             valueSlider.focus();
         }
-        
+
         function updateColor() {
             if (selectedCell) {
                 let value = valueSlider.value;
                 selectedCell.setAttribute("data-value", value);
-                
-                let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
-                let green = value > 50 ? 255 : Math.round(value * 5.1);
-                selectedCell.style.backgroundColor = `rgb(${red}, ${green}, 0)`;
+                selectedCell.style.backgroundColor = getColor(value);
+                let date = selectedCell.dataset.date;
+
+                if (value !== "") {
+                    moodData[date] = value; // Only add if there is a value
+                } else {
+                    delete moodData[date]; // Remove entry if no value
+                }
             }
         }
-        
+
         function hideSlider() {
             sliderContainer.style.display = "none";
         }
-        
+
+        function getColor(value) {
+            let red = value < 50 ? 255 : Math.round(255 - ((value - 50) * 5.1));
+            let green = value > 50 ? 255 : Math.round(value * 5.1);
+            return `rgb(${red}, ${green}, 0)`;
+        }
+
         generateCalendar();
     </script>
 </body>
-</html>
 
+</html>
