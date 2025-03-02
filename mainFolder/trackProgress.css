@@ -2,11 +2,12 @@ body {
     display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
+    background:linear-gradient(to bottom, #ffffff, #b3d1ff)
 }
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #ececf3;
+    background-color: #9fb4f0;
     color: black;
     padding: 20px;
     position: fixed;
