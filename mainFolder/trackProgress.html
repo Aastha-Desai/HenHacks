@@ -1,22 +1,18 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Month Calendar</title>
     <link rel="stylesheet" href="trackProgress.css">
 </head>
-
-<body>
-    <div class="sidebar">
+<div class="sidebar">
         <h2>Welcome User</h2>
         <a href="mainFolder/trackProgress.html">Follow goals</a>
-        <a href="mainFolder/postsPage.html">Posts from community</a>
-    </div>
+        <a href="mainChatbot.html">Talk to chill-bot</a>
+    </div> 
+<body>
     <div class="content">
         <h1>Welcome</h1>
-        <p>This is the main content area.</p>
         <div class="calendar-container">
             <div class="calendar">
                 <h2 id="monthYear"></h2>
@@ -38,7 +34,7 @@
                 </div>
                 <div id="sliderContainer">
                     <input type="range" id="valueSlider" min="0" max="100" step="1" oninput="updateColor()">
-                    <input type="text" id="moodInput" placeholder="Enter mood note" oninput="updateMood()" nblur="hideContainer()">
+                    <input type="text" id="moodInput" placeholder="Enter mood note">
                 </div>
             </div>
         </div>
@@ -47,7 +43,8 @@
         let selectedCell = null;
         const sliderContainer = document.getElementById("sliderContainer");
         const valueSlider = document.getElementById("valueSlider");
-        let moodData = {}; // Global JSON object to store mood values
+        const moodInput = document.getElementById("moodInput");
+        let moodData = {};
 
         function generateCalendar() {
             const today = new Date();
@@ -69,10 +66,7 @@
                     } else if (date > daysInMonth) {
                         row += "<td></td>";
                     } else {
-                        let fullDate = `${year}-${month + 1}-${date}`;
-                        let moodValue = moodData[fullDate] !== undefined ? moodData[fullDate] : "";
-                        let colorStyle = moodValue !== "" ? `style="background-color: ${getColor(moodValue)};"` : "";
-                        row += `<td onclick="pickColor(this, '${fullDate}')" data-value="${moodValue}" ${colorStyle}>${date}</td>`;
+                        row += `<td onclick="pickDate(this)" data-date="${date}">${date}</td>`;
                         date++;
                     }
                 }
@@ -84,31 +78,18 @@
             document.getElementById("calendarBody").innerHTML = calendarBody;
         }
 
-        function pickColor(cell, date) {
+        function pickDate(cell) {
             selectedCell = cell;
-            selectedCell.dataset.date = date;
-            valueSlider.value = selectedCell.getAttribute("data-value") || 50;
             sliderContainer.style.display = "flex";
-            valueSlider.focus();
+            valueSlider.value = 50;
+            moodInput.value = "";
         }
 
         function updateColor() {
             if (selectedCell) {
                 let value = valueSlider.value;
-                selectedCell.setAttribute("data-value", value);
                 selectedCell.style.backgroundColor = getColor(value);
-                let date = selectedCell.dataset.date;
-
-                if (value !== "") {
-                    moodData[date] = value; // Only add if there is a value
-                } else {
-                    delete moodData[date]; // Remove entry if no value
-                }
             }
-        }
-
-        function hideSlider() {
-            sliderContainer.style.display = "none";
         }
 
         function getColor(value) {
@@ -117,8 +98,13 @@
             return `rgb(${red}, ${green}, 0)`;
         }
 
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                sliderContainer.style.display = "none";
+            }
+        });
+
         generateCalendar();
     </script>
 </body>
-
 </html>
